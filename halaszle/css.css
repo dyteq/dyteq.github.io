@@ -1,0 +1,35 @@
+.bg-darkred {
+	background-color: #990000;
+	color: #ff6666;
+}
+#header {
+
+}
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cont {
+	position: relative;
+	text-align: center;
+	color: white;
+}
+
+.bor {
+	border-top: 3px solid white;
+	border-bottom: 3px solid white;
+}
+
+.text-justify
+{
+	text-align: justify;
+}
+
+#header {
+	object-fit: cover;
+    height: 250px;
+	object-position: top;
+}
