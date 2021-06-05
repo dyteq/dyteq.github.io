@@ -13,3 +13,15 @@ a {
   text-decoration: none;
   color: black;
 }
+
+kbd {
+  padding: 0.2rem 0.4rem;
+  font-size: 0.875em;
+  color: #fff;
+  background-color: #212529;
+  border-radius: 0.2rem;
+}
+
+.text-white {
+  color: white;
+}
