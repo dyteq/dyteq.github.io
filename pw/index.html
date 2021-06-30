@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="hu" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible”IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css.css">
+  <script scr="js/bootstrap.min.js"></script>
+  <script scr="js/jquery-3.6.0.min.js"></script>
+  <title>Random jelszó generátor</title>
+</head>
+
+<body class="bg-dark">
+  <div class="container">
+    <div class="alert alert-dark">
+      <h1 class="display-1 text-center">Random jelszó generátor</h1>
+    </div>
+    <div class="pt-5 alert alert-dark text-justify">
+      <center>
+        <p>Random jelszó generálás</p>
+        <p><input class="input-group-text" type=" text" readonly="" id="password" placeholder="Jelszó generálás" size="50"></p>
+        <p><button type="button" id="submit" class="btn btn-success" onclick="getPassword();">Generálás</button></p>
+      </center>
+    </div>
+    <script type="text/javascript">
+      function getPassword() {
+        var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
+        var passwordLenght = 8;
+        var password = "";
+
+        for (var i = 0; i < passwordLenght; i++) {
+          var randomNumber = Math.floor(Math.random() * chars.length);
+          password += chars.substring(randomNumber, randomNumber + 1);
+        }
+        document.getElementById('password').value = password
+      }
+    </script>
+    <p class="text-center footer">@dyteqq<br>dyteq#133
+    </p>
+  </div>
+
+</body>
+
+</html>
