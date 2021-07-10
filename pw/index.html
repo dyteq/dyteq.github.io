@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
   <script scr="js/bootstrap.min.js"></script>
   <script scr="js/jquery-3.6.0.min.js"></script>
   <title>Random jelszó generátor</title>
@@ -21,24 +22,34 @@
     <div class="pt-5 alert alert-dark text-justify">
       <center>
         <p>Random jelszó generálás</p>
-        <p><input class="input-group-text" type=" text" readonly="" id="password" placeholder="Jelszó generálás"></p>
-        <p><button type="button" id="submit" class="btn btn-success" onclick="getPassword();">Generálás</button></p>
+        <p><input class="input-group-text" type=" text" readonly id="jelszo" placeholder="jelszó generálás"></p>
+        <p><button type="button" id="submit" class="btn btn-success" onclick="getjelszo();">Generálás</button> <button onclick="myFunction()" class="btn btn-secondary"><i class="bi bi-clipboard"></i></button></p>
       </center>
     </div>
     <script type="text/javascript">
-      function getPassword() {
+      function getjelszo() {
         var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
-        var passwordLenght = 8;
-        var password = "";
+        var jelszoLenght = 8;
+        var jelszo = "";
 
-        for (var i = 0; i < passwordLenght; i++) {
+        for (var i = 0; i < jelszoLenght; i++) {
           var randomNumber = Math.floor(Math.random() * chars.length);
-          password += chars.substring(randomNumber, randomNumber + 1);
+          jelszo += chars.substring(randomNumber, randomNumber + 1);
         }
-        document.getElementById('password').value = password
+        document.getElementById('jelszo').value = jelszo
       }
     </script>
-    <p class="text-center footer">@dyteqq<br>dyteq#133
+
+    <script>
+      function myFunction() {
+        var copyText = document.getElementById("jelszo");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999)
+        document.execCommand("copy");
+        alert("Vágólapra másolva: " + copyText.value);
+      }
+    </script>
+    <p class="text-center footer alert alert-dark">@dyteqq<br>dyteq#133
     </p>
   </div>
 
