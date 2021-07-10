@@ -22,27 +22,42 @@
     <div class="pt-5 alert alert-dark text-justify">
       <center>
         <p>Random jelszó generálás</p>
-        <p><input class="input-group-text" type=" text" readonly id="jelszo" placeholder="jelszó generálás"></p>
-        <p><button type="button" id="submit" class="btn btn-success" onclick="getjelszo();">Generálás</button> <button onclick="myFunction()" class="btn btn-secondary"><i class="bi bi-clipboard"></i></button></p>
+        <p><input class="input-group-text" type=" text" readonly id="yourPw" placeholder="jelszó generálás"></p>
+        <p>Hány karakter? <input type="number" id="charNum" value="8" min="1" max="100" /></p>
+        <p>Számok <input type="checkbox" id="num"/> Különleges karakterek <input type="checkbox" id="sym"/></p>
+        <p><button type="button" id="submit" class="btn btn-success">Generálás</button> <button onclick="myFunction()" class="btn btn-secondary"><i class="bi bi-clipboard"></i></button></p>
       </center>
     </div>
     <script type="text/javascript">
-      function getjelszo() {
-        var chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
-        var jelszoLenght = 8;
-        var jelszo = "";
+    var char = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var num = '0123456789';
+    var sym = '!@#$%^&*=-_';
 
-        for (var i = 0; i < jelszoLenght; i++) {
-          var randomNumber = Math.floor(Math.random() * chars.length);
-          jelszo += chars.substring(randomNumber, randomNumber + 1);
+    var charNum = document.getElementById("charNum");
+    var numBox = document.getElementById("num");
+    var symBox = document.getElementById("sym");
+    var submit = document.getElementById("submit");
+    var yourPw = document.getElementById("yourPw");
+
+    submit.addEventListener("click",function(e){
+        var characters = char;
+        (numBox.checked) ? characters += num : '';
+        (symBox.checked) ? characters += sym : '';
+        yourPw.value = password(charNum.value, characters);
+    });
+
+    function password(l,characters){
+    		var pwd = '';
+        for(var i = 0; i<l; i++){
+        		pwd += characters.charAt(Math.floor(Math.random() * characters.length));
         }
-        document.getElementById('jelszo').value = jelszo
-      }
+        return pwd;
+    }
     </script>
 
     <script>
       function myFunction() {
-        var copyText = document.getElementById("jelszo");
+        var copyText = document.getElementById("yourPw");
         copyText.select();
         copyText.setSelectionRange(0, 99999)
         document.execCommand("copy");
