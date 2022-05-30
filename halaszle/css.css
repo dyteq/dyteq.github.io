@@ -1,6 +1,6 @@
 .bg-darkred {
 	background-color: #990000;
-	color: #ff6666;
+	color: #ff6666;	
 }
 #header {
 
@@ -28,7 +28,7 @@
 	text-align: justify;
 }
 
-#header {
+#hal {
 	object-fit: cover;
     height: 250px;
 	object-position: top;
