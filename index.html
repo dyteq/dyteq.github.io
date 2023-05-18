@@ -3,57 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script scr="js/bootstrap.min.js"></script>
     <script scr="js/jquery-3.6.0.min.js"></script>
-    <title>közös</title>
+    <script>
+        function copyTextToClipboard() {
+            var text = `import random
+
+# DNS bázisok
+bazis = ['A', 'C', 'G', 'T']
+
+# a) Véletlen hossz generálása (8-12 között)
+hossz = random.randint(8, 12)
+
+# b) Véletlen DNS lánc generálása
+dns = random.choices(bazis, k=hossz)
+
+# c) DNS lánc kiírása
+print(dns)
+
+# d) Lánc elemeinek egymás alá írása
+for elem in dns:
+    print(elem)
+
+# e) Adenin bázisok számlálása
+adenin_szamlalo = dns.count('A')
+print("Adenin bázisok száma:", adenin_szamlalo)
+
+# f) Kiegészítő DNS szál generálása
+kiegeszito_dna = []
+for b in dns:
+    if b == 'A':
+        kiegeszito_dna.append('T')
+    elif b == 'T':
+        kiegeszito_dna.append('A')
+    elif b == 'G':
+        kiegeszito_dna.append('C')
+    elif b == 'C':
+        kiegeszito_dna.append('G')
+
+# g) Eredeti és kiegészítő szál kiírása
+for i in range(len(dns)):
+    print(dns[i] + '-' + kiegeszito_dna[i])
+
+
+}`
+            var dummyElement = document.createElement('textarea');
+            dummyElement.value = text;
+            document.body.appendChild(dummyElement);
+            dummyElement.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummyElement);
+        }
+    </script>
 </head>
 <body>
-    <div class="container">
-        <div class="row m-5 ">
-            <div class="col">
-                <pre>
-                    <code>import random
-
-                        # DNS bázisok
-                        bazis = ['A', 'C', 'G', 'T']
-                        
-                        # a) Véletlen hossz generálása (8-12 között)
-                        hossz = random.randint(8, 12)
-                        
-                        # b) Véletlen DNS lánc generálása
-                        dns = random.choices(bazis, k=hossz)
-                        
-                        # c) DNS lánc kiírása
-                        print(dns)
-                        
-                        # d) Lánc elemeinek egymás alá írása
-                        for elem in dns:
-                            print(elem)
-                        
-                        # e) Adenin bázisok számlálása
-                        adenin_szamlalo = dns.count('A')
-                        print("Adenin bázisok száma:", adenin_szamlalo)
-                        
-                        # f) Kiegészítő DNS szál generálása
-                        kiegeszito_dna = []
-                        for b in dns:
-                            if b == 'A':
-                                kiegeszito_dna.append('T')
-                            elif b == 'T':
-                                kiegeszito_dna.append('A')
-                            elif b == 'G':
-                                kiegeszito_dna.append('C')
-                            elif b == 'C':
-                                kiegeszito_dna.append('G')
-                        
-                        # g) Eredeti és kiegészítő szál kiírása
-                        for i in range(len(dns)):
-                            print(dns[i] + '-' + kiegeszito_dna[i])
-                    </code>
-                </pre>
-        </div>
+    <div class="container-fluid center">
+    <div class="row">
+        <div class="col"><center><button onclick="copyTextToClipboard()" class="alert alert-dark">juj</button></center><button onclick="copyTextToClipboard()" class="alert alert-dark">juj</button></div>
+    </div>
     </div>
 </body>
 </html>
