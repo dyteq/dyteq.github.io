@@ -7,13 +7,53 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script scr="js/bootstrap.min.js"></script>
     <script scr="js/jquery-3.6.0.min.js"></script>
-    <meta property="og:title" content="hal">
-    <meta property="og:description" content="zsot">
-	<meta property="og:image" content="http://dyteq.github.io/hal/fis.jpg">
-    <meta property="og:url" content="http://dyteq.github.io/hal/index.html">
-    <title>hal</title>
+    <title>közös</title>
 </head>
-<body style="background-image: url('fis.jfif')">
-<audio src="fis.mp3" autoplay></audio>
+<body>
+    <div class="container">
+        <div class="row m-5 ">
+            <div class="col">
+                <pre>
+                    <code>import random
+
+                        # DNS bázisok
+                        bazis = ['A', 'C', 'G', 'T']
+                        
+                        # a) Véletlen hossz generálása (8-12 között)
+                        hossz = random.randint(8, 12)
+                        
+                        # b) Véletlen DNS lánc generálása
+                        dns = random.choices(bazis, k=hossz)
+                        
+                        # c) DNS lánc kiírása
+                        print(dns)
+                        
+                        # d) Lánc elemeinek egymás alá írása
+                        for elem in dns:
+                            print(elem)
+                        
+                        # e) Adenin bázisok számlálása
+                        adenin_szamlalo = dns.count('A')
+                        print("Adenin bázisok száma:", adenin_szamlalo)
+                        
+                        # f) Kiegészítő DNS szál generálása
+                        kiegeszito_dna = []
+                        for b in dns:
+                            if b == 'A':
+                                kiegeszito_dna.append('T')
+                            elif b == 'T':
+                                kiegeszito_dna.append('A')
+                            elif b == 'G':
+                                kiegeszito_dna.append('C')
+                            elif b == 'C':
+                                kiegeszito_dna.append('G')
+                        
+                        # g) Eredeti és kiegészítő szál kiírása
+                        for i in range(len(dns)):
+                            print(dns[i] + '-' + kiegeszito_dna[i])
+                    </code>
+                </pre>
+        </div>
+    </div>
 </body>
 </html>
