@@ -1,25 +1,72 @@
 <!DOCTYPE html>
-<html lang="hu">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>#</title>
-
-    <!-- Bootstrap CSS betöltése -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>♡</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    #gif-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+    #button-container {
+      text-align: center;
+      margin-top: 10px;
+    }
+    .btn {
+      margin: 3px;
+      padding: 6px 12px;
+      font-size: 14px;
+    }
+    .img-container img {
+      max-width: 90%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+  </style>
 </head>
 <body>
-
-<!-- Tartalom -->
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-6 offset-md-3 text-center">
-            <h1 class="display-1">nothing</h1>
-        </div>
+  <div class="container">
+    <div id="gif-container">
+      <div class="img-container">
+        <img src="https://media1.tenor.com/m/K_E6ORTmXMoAAAAC/milk-and-mocha-love.gif" alt="GIF">
+      </div>
     </div>
-</div>
+    <div id="button-container">
+      <button id="yes-button" class="btn btn-danger">Igen</button>
+      <button id="no-button" class="btn btn-danger">Nem</button>
+    </div>
+  </div>
 
-<!-- Bootstrap JavaScript betöltése -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      var clickCount = 0;
+
+      $('#yes-button').click(function() {
+        window.location.href = 'ly.html';
+      });
+
+      $('#no-button').click(function() {
+        clickCount++;
+        if (clickCount >= 5) {
+          $(this).hide();
+        } else {
+          var randomX = Math.floor(Math.random() * ($(window).width() - 100));
+          var randomY = Math.floor(Math.random() * ($(window).height() - 100));
+          $(this).css({
+            top: randomY,
+            left: randomX,
+            display: 'block',
+            position: 'absolute'
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
