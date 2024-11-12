@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solt</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Képernyő középre helyezés Bootstrap flexbox használatával */
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+        }
+        
+        /* Animációs stílus a kártya megjelenéséhez */
+        .card {
+            max-width: 500px;
+            width: 100%;
+            opacity: 0; /* Kezdetben átlátszó */
+            transform: translateY(50px); /* Kezdő pozíció - lejjebb tolva */
+            animation: popUp 0.6s ease-out forwards; /* Animáció meghívása */
+        }
+
+        /* Egyéni gombszín */
+        .btn-custom {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        /* Felugró animáció */
+        @keyframes popUp {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card text-center shadow-lg">
+        <div class="card-body">
+            <h5 class="card-title">Szia Solt!</h5>
+            <p class="card-text">Nézdd meg ezt a videót!</p>
+            <a href="https://www.youtube.com/watch?v=bB_Wzl1fKBw" class="btn btn-custom" target="_blank">Megnézem</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS és jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
