@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Directory</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .copy-btn {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+        }
+        .copy-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="text-center mb-4">
+            <h1 class="display-6">Active Directory</h1>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <textarea id="userList" class="form-control" rows="15" readonly>
+Varga,Márkó,pmvarmar,ABCdef123,9-evfolyam,9a,9a
+Nagy,Anna,pmnagann,ABCdef123,9-evfolyam,9a,9a
+Kiss,Áron,pmkisaro,ABCdef123,9-evfolyam,9a,9a
+Tóth,Éva,pmtoteva,ABCdef123,9-evfolyam,9b,9b
+Horváth,Levente,pmhorlev,ABCdef123,9-evfolyam,9b,9b
+Szabó,Zsófia,pmszazso,ABCdef123,9-evfolyam,9b,9b
+Balogh,Dávid,pmbaldav,ABCdef123,9-evfolyam,9c,9c
+Molnár,Emma,pmmolemm,ABCdef123,9-evfolyam,9c,9c
+Farkas,Bence,pmfarben,ABCdef123,9-evfolyam,9c,9c
+Papp,Rebeka,pmpapreb,ABCdef123,10-evfolyam,10a,10a
+Kovács,Gergő,pmkovger,ABCdef123,10-evfolyam,10a,10a
+Szilágyi,Nóra,pmszinor,ABCdef123,10-evfolyam,10a,10a
+Oláh,Patrik,pmolapat,ABCdef123,10-evfolyam,10b,10b
+Fekete,Ádám,pmfekada,ABCdef123,10-evfolyam,10b,10b
+Török,Vivien,pmtorviv,ABCdef123,10-evfolyam,10b,10b
+Váradi,Eszter,pmvaresz,ABCdef123,10-evfolyam,10c,10c
+Szilvási,Levente,pmszilev,ABCdef123,10-evfolyam,10c,10c
+Kovács,Nikolett,pmkovnik,ABCdef123,10-evfolyam,10c,10c
+Németh,Dániel,pmnemdan,ABCdef123,11-evfolyam,11a,11a
+Lukács,Dóra,pmlukdor,ABCdef123,11-evfolyam,11a,11a
+Kiss,Máté,pmkismat,ABCdef123,11-evfolyam,11a,11a
+Tóth,Noémi,pmtotnoe,ABCdef123,11-evfolyam,11b,11b
+Farkas,Péter,pmfarpit,ABCdef123,11-evfolyam,11b,11b
+Takács,Zsombor,pmtakzso,ABCdef123,11-evfolyam,11b,11b
+Oláh,Balázs,pmolabaz,ABCdef123,11-evfolyam,11c,11c
+Pintér,Laura,pmpinlau,ABCdef123,11-evfolyam,11c,11c
+Nagy,Vivien,pmnagviv,ABCdef123,11-evfolyam,11c,11c
+Kerekes,Gábor,pmkergab,ABCdef123,12-evfolyam,12a,12a
+Mészáros,Ákos,pmmesako,ABCdef123,12-evfolyam,12a,12a
+Szalai,Flóra,pmszaflo,ABCdef123,12-evfolyam,12a,12a
+Tóth,András,pmtotand,ABCdef123,12-evfolyam,12b,12b
+Oláh,Izabella,pmoliiza,ABCdef123,12-evfolyam,12b,12b
+Kiss,Nóra,pmkisnor,ABCdef123,12-evfolyam,12b,12b
+Varga,Zoltán,pmvarzol,ABCdef123,12-evfolyam,12c,12c
+Horváth,Tímea,pmhortim,ABCdef123,12-evfolyam,12c,12c
+Nagy,Lili,pmnaglii,ABCdef123,12-evfolyam,12c,12c
+                </textarea>
+                <div class="text-end mt-3">
+                    <button class="btn copy-btn" onclick="copyToClipboard()">Másolás</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function copyToClipboard() {
+            const textarea = document.getElementById("userList");
+            textarea.select();
+            textarea.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(textarea.value);
+        }
+    </script>
+</body>
+</html>
