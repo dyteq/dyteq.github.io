@@ -1,0 +1,415 @@
+
+html_content = '''<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IT Portfolió – Márkó</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --card: #1c2128;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(13,17,23,0.92);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+    }
+    .nav-logo {
+      font-family: 'Fira Code', monospace;
+      font-size: 1.1rem;
+      color: var(--accent);
+    }
+    .nav-logo span { color: var(--accent2); }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 5rem 2rem 3rem;
+    }
+    .hero-tag {
+      font-family: 'Fira Code', monospace;
+      color: var(--accent2);
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 .highlight { color: var(--accent); }
+    .hero p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      padding: .65rem 1.4rem;
+      border-radius: 6px;
+      font-size: .9rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity .2s, transform .15s;
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+    }
+    .btn:hover { opacity: .85; transform: translateY(-1px); }
+    .btn-primary { background: var(--accent); color: #0d1117; }
+    .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+
+    /* STATS STRIP */
+    .stats {
+      max-width: 900px;
+      margin: 3rem auto 0;
+      padding: 0 2rem;
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .stat-item { display: flex; flex-direction: column; }
+    .stat-num { font-size: 1.6rem; font-weight: 700; color: var(--accent); }
+    .stat-label { font-size: .8rem; color: var(--muted); margin-top: .1rem; }
+
+    /* DIVIDER */
+    .divider {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* SKILLS */
+    .section {
+      max-width: 900px;
+      margin: 0 auto 3.5rem;
+      padding: 0 2rem;
+    }
+    .section-title {
+      font-family: 'Fira Code', monospace;
+      color: var(--muted);
+      font-size: .8rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .skill-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.1rem 1.3rem;
+      transition: border-color .2s, transform .15s;
+    }
+    .skill-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .skill-card-header {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      margin-bottom: .7rem;
+    }
+    .skill-icon {
+      width: 32px; height: 32px;
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+    .icon-blue { background: rgba(88,166,255,.15); }
+    .icon-green { background: rgba(63,185,80,.15); }
+    .icon-orange { background: rgba(255,166,0,.15); }
+    .icon-purple { background: rgba(188,130,255,.15); }
+    .skill-card h3 { font-size: .95rem; font-weight: 600; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .tag {
+      font-size: .75rem;
+      padding: .2rem .55rem;
+      border-radius: 20px;
+      background: var(--surface);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.3rem;
+      transition: border-color .2s;
+    }
+    .project-card:hover { border-color: var(--accent2); }
+    .project-card h3 {
+      font-size: .95rem;
+      margin-bottom: .5rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .project-card p { color: var(--muted); font-size: .87rem; line-height: 1.6; }
+    .project-lang {
+      display: inline-block;
+      margin-top: .8rem;
+      font-size: .75rem;
+      color: var(--accent2);
+      font-family: 'Fira Code', monospace;
+    }
+    .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+    /* CONTACT */
+    .contact-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2.5rem;
+      text-align: center;
+    }
+    .contact-box h2 { font-size: 1.5rem; margin-bottom: .75rem; }
+    .contact-box p { color: var(--muted); max-width: 420px; margin: 0 auto 1.5rem; line-height: 1.7; }
+    .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 1.5rem;
+      color: var(--muted);
+      font-size: .8rem;
+      font-family: 'Fira Code', monospace;
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: .8rem 1rem; }
+      .nav-links { display: none; }
+      .hero, .section, .stats { padding-left: 1rem; padding-right: 1rem; }
+      .contact-box { padding: 1.5rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">m<span>@</span>rko:~$</div>
+  <div class="nav-links">
+    <a href="#skills">Készségek</a>
+    <a href="#projects">Projektek</a>
+    <a href="#contact">Kapcsolat</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">// Elérhető munkára / szakmai gyakorlatra</div>
+  <h1>Szia, <span class="highlight">Márkó</span> vagyok —<br>IT hallgató &amp; hálózatadminisztrátor</h1>
+  <p>Windows Server, Linux, Cisco hálózatok és automatizálás iránt érdeklődöm. Szeretek komplex rendszereket felépíteni és megérteni, hogyan kommunikálnak egymással.</p>
+  <div class="hero-btns">
+    <a href="#projects" class="btn btn-primary">⚡ Projektjeim</a>
+    <a href="#contact" class="btn btn-outline">📬 Kapcsolatfelvétel</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-item">
+    <span class="stat-num">2+</span>
+    <span class="stat-label">év tapasztalat</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">10+</span>
+    <span class="stat-label">lab / projekt</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">3</span>
+    <span class="stat-label">platform (Win/Linux/Cisco)</span>
+  </div>
+</div>
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <div class="section-title">// Készségek &amp; technológiák</div>
+  <div class="skills-grid">
+
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon icon-blue">🖥️</div>
+        <h3>Windows Server</h3>
+      </div>
+      <div class="skill-tags">
+        <span class="tag">Active Directory</span>
+        <span class="tag">GPO</span>
+        <span class="tag">MMC</span>
+        <span class="tag">DHCP</span>
+        <span class="tag">DNS</span>
+        <span class="tag">PowerShell</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon icon-orange">🐧</div>
+        <h3>Linux / Debian</h3>
+      </div>
+      <div class="skill-tags">
+        <span class="tag">Bash</span>
+        <span class="tag">Apache2</span>
+        <span class="tag">UFW</span>
+        <span class="tag">SSH</span>
+        <span class="tag">User mgmt</span>
+        <span class="tag">Cron</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon icon-green">🌐</div>
+        <h3>Cisco Hálózatok</h3>
+      </div>
+      <div class="skill-tags">
+        <span class="tag">VLAN</span>
+        <span class="tag">HSRP</span>
+        <span class="tag">STP</span>
+        <span class="tag">OSPF</span>
+        <span class="tag">ACL</span>
+        <span class="tag">Packet Tracer</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-header">
+        <div class="skill-icon icon-purple">⚙️</div>
+        <h3>Automatizálás &amp; Dev</h3>
+      </div>
+      <div class="skill-tags">
+        <span class="tag">PowerShell</span>
+        <span class="tag">GitHub</span>
+        <span class="tag">HTML/CSS</span>
+        <span class="tag">GCP</span>
+        <span class="tag">Git</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="section-title">// Projektek &amp; laborok</div>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <h3>🔁 HSRP Redundancia Lab</h3>
+      <p>Két router közötti aktív-készenléti átjáró megvalósítása HSRP segítségével, automatikus failover teszteléssel.</p>
+      <span class="project-lang"><span class="dot" style="background:#f78166"></span> Cisco IOS</span>
+    </div>
+
+    <div class="project-card">
+      <h3>🗂️ VLAN Szegmentálás</h3>
+      <p>Többrétegű VLAN konfiguráció inter-VLAN routinggal, 802.1Q trunk linkekkel és ACL alapú hozzáférésvezérléssel.</p>
+      <span class="project-lang"><span class="dot" style="background:#f78166"></span> Cisco IOS</span>
+    </div>
+
+    <div class="project-card">
+      <h3>🐧 Apache Web Server</h3>
+      <p>Debian alapú Apache2 szerver telepítése és konfigurálása, virtuális hosztokkal és alapszintű tűzfal szabályokkal.</p>
+      <span class="project-lang"><span class="dot" style="background:#f1e05a"></span> Bash / Linux</span>
+    </div>
+
+    <div class="project-card">
+      <h3>🏢 Windows Server AD</h3>
+      <p>Active Directory domain felépítése GPO szabályzatokkal, felhasználókezeléssel és automatizált PowerShell szkriptekkel.</p>
+      <span class="project-lang"><span class="dot" style="background:#012456"></span> PowerShell</span>
+    </div>
+
+    <div class="project-card">
+      <h3>🔒 PPP / CHAP Auth</h3>
+      <p>Point-to-Point protokoll konfigurálása CHAP hitelesítéssel két router között WAN szimulációs környezetben.</p>
+      <span class="project-lang"><span class="dot" style="background:#f78166"></span> Cisco IOS</span>
+    </div>
+
+    <div class="project-card">
+      <h3>☁️ GCP Kísérletezés</h3>
+      <p>Google Cloud Platform alapszintű VM-ek és hálózati erőforrások kipróbálása, cloud vs. on-premise összehasonlítás.</p>
+      <span class="project-lang"><span class="dot" style="background:#4285f4"></span> GCP</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="section-title">// Kapcsolat</div>
+  <div class="contact-box">
+    <h2>Keress meg nyugodtan! 👋</h2>
+    <p>Nyitott vagyok szakmai gyakorlatra, együttműködésre vagy csak egy jó IT-s beszélgetésre. Bonyhád, Tolna megye.</p>
+    <div class="contact-links">
+      <a href="https://github.com/" class="btn btn-outline" target="_blank">GitHub</a>
+      <a href="mailto:marko@example.com" class="btn btn-outline">📧 Email</a>
+      <a href="https://linkedin.com/" class="btn btn-primary" target="_blank">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>// made with ❤️ by Márkó · Bonyhád, HU · 2026</p>
+</footer>
+
+</body>
+</html>'''
+
+with open('/root/index.html', 'w', encoding='utf-8') as f:
+    f.write(html_content)
+
+print("Saved:", len(html_content), "characters")
