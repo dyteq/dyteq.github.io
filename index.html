@@ -3,316 +3,417 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ballagási meghívó</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
-
+  <title>Varga Márkó – IT Szolgáltatások</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #050509;
+      --bg-soft: #070712;
+      --card: #0e0e14;
+      --border: #1f1f2a;
+      --accent: #6366f1;
+      --accent-soft: rgba(99,102,241,0.16);
+      --text: #f4f4f5;
+      --muted: #8a8aa0;
+      --subtle: #4b4b61;
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      background: #f3ece7;
-      font-family: "Cormorant Garamond", serif;
-    }
-
-    .card {
-      position: relative;
-      width: 100%;
-      max-width: 603px;
-      min-height: 1080px;
-      overflow: hidden;
       background:
-        radial-gradient(circle at center, rgba(255,255,255,0.92), rgba(247,241,233,0.96)),
-        linear-gradient(180deg, #f8f3ec 0%, #f7f2eb 100%);
-      color: #161211;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+        radial-gradient(circle at top left, #111827 0, transparent 55%),
+        radial-gradient(circle at bottom right, #1f2937 0, transparent 55%),
+        var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    .paper {
-      position: absolute;
+    /* NOISE TEXTURE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed;
       inset: 0;
-      opacity: 0.18;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
       pointer-events: none;
-      background-image:
-        radial-gradient(rgba(120,100,80,0.12) 0.6px, transparent 0.6px),
-        radial-gradient(rgba(120,100,80,0.08) 0.6px, transparent 0.6px);
-      background-size: 12px 12px, 18px 18px;
-      background-position: 0 0, 6px 6px;
-      mix-blend-mode: multiply;
+      z-index: 0;
     }
 
-    .curve-top {
-      position: absolute;
-      top: -110px;
-      left: -120px;
-      width: 330px;
-      height: 240px;
-      background: #d8c2c5;
-      border-bottom-right-radius: 260px;
-      opacity: 0.95;
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 50;
+      padding: 1.1rem 2.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(31,31,42,0.9);
+      background: linear-gradient(to bottom, rgba(5,5,9,0.95), rgba(5,5,9,0.85));
+      backdrop-filter: blur(16px);
     }
-
-    .curve-bottom {
-      position: absolute;
-      left: -90px;
-      bottom: -90px;
-      width: 310px;
-      height: 220px;
-      background: #d8c2c5;
-      border-top-right-radius: 260px;
-      opacity: 0.95;
+    .nav-logo {
+      font-size: .98rem;
+      font-weight: 600;
+      letter-spacing: -.01em;
     }
-
-    .gold-line-top,
-    .gold-line-bottom {
-      position: absolute;
-      border: 4px solid #d2ac4f;
-      border-color: #d2ac4f transparent transparent transparent;
+    .nav-logo span { color: var(--accent); }
+    .nav-dot {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: .78rem;
+      color: var(--muted);
+    }
+    .dot-green {
+      width: 7px; height: 7px;
+      background: #22c55e;
       border-radius: 50%;
-      pointer-events: none;
+      box-shadow: 0 0 6px #22c55e;
+      animation: breathe 2s infinite;
+    }
+    @keyframes breathe {
+      0%,100% { opacity: 1; box-shadow: 0 0 6px #22c55e; }
+      50% { opacity: .5; box-shadow: 0 0 2px #22c55e; }
     }
 
-    .gold-line-top {
-      top: -70px;
-      left: -70px;
-      width: 270px;
-      height: 190px;
-      transform: rotate(-18deg);
-    }
-
-    .gold-line-bottom {
-      left: -65px;
-      bottom: 78px;
-      width: 250px;
-      height: 230px;
-      transform: rotate(25deg);
-    }
-
-    .content {
+    /* WRAPPER */
+    .wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 2rem;
       position: relative;
-      z-index: 2;
-      text-align: center;
-      padding: 92px 42px 70px;
-    }
-
-    h1 {
-      font-size: 4.2rem;
-      line-height: 1.05;
-      font-weight: 600;
-      margin-bottom: 96px;
-    }
-
-    .name {
-      font-size: 2.15rem;
-      line-height: 1.2;
-      margin-bottom: 58px;
-      font-weight: 500;
-    }
-
-    .message {
-      max-width: 470px;
-      margin: 0 auto 64px;
-      font-size: 2rem;
-      line-height: 1.27;
-      font-weight: 600;
-    }
-
-    .date-box {
-      display: inline-block;
-      background: rgba(214, 187, 194, 0.55);
-      padding: 8px 14px;
-      margin-bottom: 16px;
-    }
-
-    .date-box p {
-      font-size: 1.55rem;
-      line-height: 1.1;
-      font-weight: 700;
-    }
-
-    .start {
-      font-size: 1.15rem;
-      line-height: 1.15;
-      margin-bottom: 88px;
-      font-weight: 600;
-    }
-
-    .signature {
-      font-size: 2rem;
-      line-height: 1.2;
-      font-weight: 500;
-    }
-
-    .floral {
-      position: absolute;
       z-index: 1;
-      opacity: 0.45;
-      color: #a48f94;
-      pointer-events: none;
     }
 
-    .floral svg {
-      width: 100%;
-      height: 100%;
+    /* HERO */
+    .hero {
+      padding: 9.5rem 0 5.5rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) auto;
+      align-items: center;
+      gap: 3rem;
+    }
+    .hero-eyebrow {
+      font-size: .75rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: 1.1rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 4.4vw, 2.9rem);
+      font-weight: 700;
+      line-height: 1.13;
+      letter-spacing: -.03em;
+      margin-bottom: 1.1rem;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--muted);
+      font-weight: 400;
+    }
+    .hero-sub {
+      color: var(--muted);
+      font-size: .95rem;
+      line-height: 1.75;
+      max-width: 440px;
+      margin-bottom: 1.3rem;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .45rem;
+    }
+    .tag {
+      font-size: .74rem;
+      padding: .25rem .65rem;
+      border-radius: 999px;
+      border: 1px solid rgba(63,63,94,0.9);
+      background: rgba(15,23,42,0.7);
+      color: var(--muted);
+    }
+
+    .hero-photo-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+    .hero-photo {
+      width: 122px;
+      height: 122px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      border: 1px solid var(--border);
+      filter: grayscale(8%);
+    }
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -9px;
+      border-radius: 50%;
+      border: 1px solid rgba(148,163,253,0.45);
+      box-shadow: 0 0 25px rgba(129,140,248,0.4);
+      opacity: .9;
+    }
+
+    /* DIVIDER */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 0 3.2rem;
+    }
+
+    /* SERVICES */
+    .section-label {
+      font-size: .7rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: 1.4rem;
+    }
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 4rem;
+    }
+    .sc {
+      background: var(--card);
+      padding: 1.4rem 1.35rem;
+      transition: background .18s, transform .18s;
+      cursor: default;
+    }
+    .sc:hover {
+      background: var(--bg-soft);
+      transform: translateY(-2px);
+    }
+    .sc-icon {
+      font-size: 1.3rem;
+      margin-bottom: .75rem;
       display: block;
     }
-
-    .floral.top-right {
-      top: 0;
-      right: 0;
-      width: 185px;
-      height: 210px;
+    .sc h3 {
+      font-size: .86rem;
+      font-weight: 600;
+      margin-bottom: .3rem;
+      color: var(--text);
+    }
+    .sc p {
+      font-size: .76rem;
+      color: var(--muted);
+      line-height: 1.6;
     }
 
-    .floral.bottom-right {
-      right: 0;
-      bottom: 0;
-      width: 180px;
-      height: 215px;
+    /* CONTACT */
+    .contact {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.4rem;
+      background: radial-gradient(circle at top right, var(--accent-soft), transparent 55%), var(--card);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 4.2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      margin-bottom: .4rem;
+    }
+    .contact p {
+      color: var(--muted);
+      font-size: .87rem;
+      line-height: 1.65;
+    }
+    .btns {
+      display: flex;
+      gap: .6rem;
+      flex-wrap: wrap;
+      flex-shrink: 0;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .6rem 1.3rem;
+      border-radius: 9px;
+      font-size: .84rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity .18s, transform .15s, box-shadow .18s, background .18s;
+      white-space: nowrap;
+    }
+    .btn:hover { opacity: .9; transform: translateY(-1px); }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 0 22px rgba(99,102,241,.38);
+      border: 1px solid rgba(191,219,254,0.4);
+    }
+    .btn-ghost {
+      background: #111827;
+      color: var(--text);
+      border: 1px solid var(--border);
     }
 
-    .floral.bottom-left {
-      left: 0;
-      bottom: 120px;
-      width: 145px;
-      height: 145px;
-      opacity: 0.52;
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 0;
+      text-align: center;
+      color: var(--subtle);
+      font-size: .75rem;
     }
 
-    @media (max-width: 640px) {
-      .card {
-        min-height: 100vh;
-      }
-
-      .content {
-        padding: 72px 28px 54px;
-      }
-
-      h1 {
-        font-size: 3.35rem;
-        margin-bottom: 72px;
-      }
-
-      .name {
-        font-size: 1.8rem;
-        margin-bottom: 46px;
-      }
-
-      .message {
-        font-size: 1.72rem;
-        margin-bottom: 50px;
-      }
-
-      .date-box p {
-        font-size: 1.25rem;
-      }
-
-      .start {
-        font-size: 1rem;
-        margin-bottom: 72px;
-      }
-
-      .signature {
-        font-size: 1.8rem;
-      }
+    @media (max-width: 600px) {
+      nav { padding: 1rem 1.25rem; }
+      .wrap { padding: 0 1.25rem; }
+      .hero { grid-template-columns: 1fr; padding: 8rem 0 4.5rem; gap: 1.6rem; }
+      .hero-photo-wrap { order: -1; justify-self: flex-start; }
+      .hero-sub { max-width: none; }
+      .contact { flex-direction: column; align-items: flex-start; }
+      .btns { width: 100%; }
+      .btn { flex: 1; justify-content: center; }
+    }
+    @media (max-width: 400px) {
+      .services { grid-template-columns: 1fr; }
+      .hero-photo-wrap { justify-self: center; }
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="paper"></div>
 
-    <div class="curve-top"></div>
-    <div class="curve-bottom"></div>
-    <div class="gold-line-top"></div>
-    <div class="gold-line-bottom"></div>
+<nav>
+  <span class="nav-logo">Varga <span>Márkó</span></span>
+  <div class="nav-dot">
+    <span class="dot-green"></span>
+    Elérhető megbízásokra
+  </div>
+</nav>
 
-    <div class="floral top-right">
-      <svg viewBox="0 0 200 230" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M180 0C168 33 154 54 132 77C118 92 111 108 110 134" />
-          <path d="M152 18C141 26 132 33 124 44" />
-          <path d="M138 30C150 30 159 34 166 41" />
-          <path d="M128 55C113 56 101 61 91 71" />
-          <path d="M118 68C126 78 130 88 131 100" />
-          <path d="M105 92C91 93 79 98 69 107" />
-          <path d="M98 105C106 114 111 125 112 137" />
-          <path d="M96 138C83 142 73 150 66 160" />
-          <path d="M88 149C94 158 97 168 98 179" />
-          <path d="M118 18C129 8 141 4 156 5" />
-          <path d="M110 27C101 16 91 10 76 8" />
-          <path d="M96 39C88 29 80 23 68 19" />
-          <path d="M168 24C180 20 189 21 198 26" />
-          <path d="M159 45C171 46 181 49 190 57" />
-          <path d="M145 71C158 72 170 77 179 85" />
-          <path d="M132 100C146 102 157 108 166 118" />
-          <path d="M121 130C135 133 146 139 154 149" />
-          <path d="M110 160C122 165 131 173 138 184" />
-          <circle cx="150" cy="22" r="18"/>
-          <path d="M150 4V40M132 22H168M138 10L162 34M162 10L138 34"/>
-        </g>
-      </svg>
-    </div>
+<div class="wrap">
 
-    <div class="floral bottom-right">
-      <svg viewBox="0 0 200 230" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M198 230C172 194 149 170 122 150C100 135 88 112 84 88" />
-          <path d="M132 145C145 142 156 136 165 126" />
-          <path d="M120 132C128 122 133 111 136 98" />
-          <path d="M104 117C116 113 126 106 133 96" />
-          <path d="M94 100C100 89 103 79 104 67" />
-          <path d="M80 83C69 78 58 70 51 60" />
-          <path d="M70 93C58 94 48 91 38 83" />
-          <path d="M61 111C50 114 41 121 35 130" />
-          <path d="M114 160C124 168 131 178 136 190" />
-          <path d="M96 147C85 154 74 158 61 159" />
-          <circle cx="72" cy="96" r="18"/>
-          <path d="M72 78V114M54 96H90M60 84L84 108M84 84L60 108"/>
-        </g>
-      </svg>
-    </div>
-
-    <div class="floral bottom-left">
-      <svg viewBox="0 0 170 170" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M0 40C28 52 52 71 69 95C84 116 96 134 118 150" />
-          <path d="M42 76C51 64 61 55 73 49" />
-          <path d="M52 88C66 88 78 92 88 100" />
-          <path d="M70 108C63 120 60 131 61 144" />
-          <circle cx="48" cy="88" r="20"/>
-          <path d="M48 68V108M28 88H68M34 74L62 102M62 74L34 102"/>
-        </g>
-      </svg>
-    </div>
-
-    <div class="content">
-      <h1>Ballagási meghívó</h1>
-
-      <div class="name">Drága Rebeka, szerelmem!</div>
-
-      <div class="message">
-        Szeretettel meghívlak a ballagásomra, és nagyon boldoggá tennél,
-        ha ezen a fontos napon mellettem lennél.
+  <!-- HERO -->
+  <div class="hero">
+    <div>
+      <div class="hero-eyebrow">IT szolgáltatások · Bonyhád</div>
+      <h1>Megbízható IT-támogatás,<br><em>egyszerűen és gyorsan.</em></h1>
+      <p class="hero-sub">
+        Számítógép-összeállítástól a szerverek beüzemeléséig – elvégzem a mindennapi
+        informatikai feladatokat, akár személyesen, akár távoli eléréssel.
+      </p>
+      <div class="hero-tags">
+        <span class="tag">Windows telepítés és licencelés</span>
+        <span class="tag">Windows Server konfiguráció</span>
+        <span class="tag">Távoli asztal / online segítség</span>
+        <span class="tag">Gépösszeállítás, bővítés</span>
+        <span class="tag">Weboldal- és webshopkészítés</span>
+        <span class="tag">Google Cloud VM-ek</span>
       </div>
-
-      <div class="date-box">
-        <p>Időpont: 2026. április 30. 16:00</p>
-      </div>
-
-      <div class="start">Kezdés: délután 4 óra</div>
-
-      <div class="signature">Szeretettel várlak: Márkó</div>
+    </div>
+    <div class="hero-photo-wrap">
+      <img class="hero-photo" src="IMG_0916.png" alt="Varga Márkó" />
     </div>
   </div>
+
+  <hr class="divider" />
+
+  <!-- SERVICES -->
+  <div class="section-label">Szolgáltatások</div>
+  <div class="services">
+
+    <div class="sc">
+      <span class="sc-icon">🪟</span>
+      <h3>Windows telepítés</h3>
+      <p>Tiszta rendszertelepítés, licencelés, illesztőprogramok és frissítések beállítása.</p>
+    </div>
+
+    <div class="sc">
+      <span class="sc-icon">🗄️</span>
+      <h3>Windows Server</h3>
+      <p>Szerverek telepítése, konfigurálása, felhasználókezelés és alapvető karbantartás.</p>
+    </div>
+
+    <div class="sc">
+      <span class="sc-icon">🔩</span>
+      <h3>Gép összeszerelés</h3>
+      <p>Egyedi számítógép megtervezése és összeállítása, igényekhez igazított alkatrészekkel.</p>
+    </div>
+
+    <div class="sc">
+      <span class="sc-icon">🔧</span>
+      <h3>Hardverkarbantartás</h3>
+      <p>Tisztítás, alkatrészcsere, bővítés – asztali géphez és laptophoz is.</p>
+    </div>
+
+    <div class="sc">
+      <span class="sc-icon">🖥️</span>
+      <h3>Távoli asztal / online segítség</h3>
+      <p>RemoteDesktop, hibák javítása és beállítások elvégzése interneten keresztül.</p>
+    </div>
+
+    <div class="sc">
+      <span class="sc-icon">🌐</span>
+      <h3>Weboldal készítés</h3>
+      <p>Egyszerű, áttekinthető bemutatkozó oldalak és landing page-ek tervezése és kivitelezése.</p>
+    </div>
+
+    <div class="sc">
+      <span class="sc-icon">🛒</span>
+      <h3>Webshop készítés</h3>
+      <p>Kisebb webáruházak felépítése, alapbeállításokkal és induláshoz szükséges technikai segítséggel.</p>
+    </div>
+
+    <div class="sc">
+      <span class="sc-icon">☁️</span>
+      <h3>Cloud és VM-ek</h3>
+      <p>Google Cloud virtuális gépek létrehozása és kezelése, alapfeladatok automatizálása.</p>
+    </div>
+
+    <div class="sc">
+      <span class="sc-icon">💡</span>
+      <h3>Általános IT-támogatás</h3>
+      <p>Szoftvertelepítés, vírusirtás, hálózati beállítás és informatikai tanácsadás.</p>
+    </div>
+
+  </div>
+
+  <!-- CONTACT -->
+  <div class="contact" id="contact">
+    <div>
+      <h2>Vedd fel velem a kapcsolatot</h2>
+      <p>
+        Írd meg röviden, miben segíthetek, és hamarosan visszajelzek.
+        Magánszemélyeknek és kisebb vállalkozásoknak egyaránt.
+      </p>
+    </div>
+    <div class="btns">
+      <a href="mailto:varga.marko@outlook.hu" class="btn btn-primary">✉ E-mail</a>
+      <a href="tel:+36304724530" class="btn btn-ghost">📞 Telefon</a>
+      <a href="https://github.com/dyteq" class="btn btn-ghost" target="_blank">GitHub</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>Varga Márkó · Bonyhád, Tolna megye · 2026</footer>
+
 </body>
 </html>
