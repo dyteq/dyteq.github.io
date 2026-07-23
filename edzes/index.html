@@ -1,92 +1,664 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Edzésterv</title>
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<!-- saved from url=(1570)https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/154332080/7d35beee-c40a-4654-a09b-0fbbc0df618a/edzes_tracker_final-1.html?AWSAccessKeyId=ASIA2F3EMEYETH3Y6FSR&Signature=TPV3sHF0xLv6WgJrqDOOXtrEFwk%3D&x-amz-security-token=IQoJb3JpZ2luX2VjECgaCXVzLWVhc3QtMSJHMEUCIGDSYyV9dpPw%2F4KK61asi%2Bk9rYwz2gTbpvxUKe6qz%2BNJAiEAwqKxCSV4bJeFFIwA%2BIQoCbZ2xGrcfmGg7ySCpJPbXFcq%2FAQI8f%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FARABGgw2OTk3NTMzMDk3MDUiDG7aNBccxcPbhVn6ESrQBJo5%2BQ3x9x%2BuQUwbK9oHJoDOxmi0LtCXMCnIUTYkrh%2FROqAq25VIqumoNyeNIgi0oGI046WKUHVrFnpsPKlYJsjDieR92O%2Bp7lPpJ7TU0pQBrZEgJWlCKgF4J6U4zJtrxNml9FqJ%2BsXXJ%2BwmQi%2FsO6vmkY93AryGCWTs0a9NlkKg8GnQ%2F5tJkYQfHbdB4%2B3LlMNNoS6h5Ez%2FqxYHfaDd6xsZxclhD46o%2Fkx5T6xRymLGzcCOe%2BVaGNssSB%2BFfBv%2B%2FBfiR1iLiZUYH31HeaDai%2BDJKchvNlLck0%2BfCSuUbbUWGty5NRFEa%2BDuZV%2BQcrVTUkz6tIrgOH6hnzOINAc8HD4JQbPA6btXTVDSs9AGOA7iI1p2%2FaGCrqBl%2FLWirr9epYYituNbLT7q0heTEzg9yInoP538mWXVGm2Oscpl6YmYYJHsJixu7y98ZB5lmk3NnlHuRWBIOdpUb%2FUBdmR5tt%2Fg58cp2YtuNkeGUO6hFnAXXPMd6fyiizlsfsd%2FAuXQugNClAQY7mhmZhHY8MOtdgO1uZ9Boq1kwvqQ8Pois8ionsb9Ca4XmYtTo%2B8pYDMagZuTVKOY7kiYoOZpz0ZdNj5Sl7%2FxI6m3Ek1YZVJGrDRHoNdTo%2Bo8sIK%2FsEmOBMqWJkyOo496FpVTjIn6QZMz3GQGQo07mOpS2bTkirK7%2BmX3TcttKcVEk9DmbeMjWTZoey3dMEcQb7uP9qikhi%2BBwYdlIbbLkoXUIwXSn8hh3g81v8BNhExp7Y0kdV178IBzPZBPPEGVM0UkcTD2ebfbBHYw3%2BaI0wY6mAGDwMDEblbB95BUvM2ciw4ka%2FGnhRjwuAORAKhTn%2FRdPqqEnpQ2PagopZjTCgtL41fsNkQLuHJH3JtxU93ZGQBWRbi8sotsUaJhSC%2Fm9xFkvEH4v1%2BG0VeUtm8e0uG19wScEzKFMG1m8g9bj5ieojnz373A6Sg%2FksLRyejpjHN5uq0kVZdzwhwxLOl0gT4kNKjccsHODo2MWg%3D%3D&Expires=1784824114 -->
+<html lang="hu"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>body {transition: opacity ease-in 0.2s; } 
+body[unresolved] {opacity: 0; display: block; overflow: hidden; position: relative; } 
+</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edzés Tracker</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --accent: #38bdf8;
+    --accent2: #22c55e;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --danger: #ef4444;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 20px;
+  }
+  h1 {
+    text-align: center;
+    margin-bottom: 5px;
+    font-size: 28px;
+  }
+  .subtitle {
+    text-align: center;
+    color: var(--muted);
+    margin-bottom: 25px;
+  }
+  .day-selector {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+  }
+  .day-btn {
+    background: var(--card);
+    border: 2px solid transparent;
+    color: var(--text);
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+  }
+  .day-btn:hover { border-color: var(--accent); }
+  .day-btn.active {
+    background: var(--accent);
+    color: #0f172a;
+    font-weight: bold;
+  }
+  .container {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .day-panel { display: none; }
+  .day-panel.active { display: block; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px);} to { opacity:1; transform: translateY(0);} }
+
+  .exercise-card {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  .exercise-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .exercise-name {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .exercise-actions button {
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 16px;
+    margin-left: 8px;
+  }
+  .exercise-actions button:hover { color: var(--danger); }
+
+  .set-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #0f172a;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-bottom: 6px;
+  }
+  .set-info { display: flex; align-items: center; gap: 10px; }
+  .set-label { color: var(--muted); font-size: 14px; width: 60px; }
+  .set-checkbox {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    accent-color: var(--accent2);
+  }
+  .set-detail {
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .set-row.done .set-detail { color: var(--accent2); text-decoration: line-through; }
+  .remove-set {
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .remove-set:hover { color: var(--danger); }
+
+  .add-set-btn, .add-exercise-btn {
+    background: none;
+    border: 1px dashed var(--accent);
+    color: var(--accent);
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    margin-top: 6px;
+  }
+  .add-exercise-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    font-size: 15px;
+  }
+
+  .new-set-form, .new-exercise-form {
+    display: none;
+    margin-top: 10px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .new-set-form.show, .new-exercise-form.show { display: flex; }
+  .new-set-form input, .new-exercise-form input {
+    background: #0f172a;
+    border: 1px solid #334155;
+    color: var(--text);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    width: 90px;
+  }
+  .new-exercise-form input { width: 160px; }
+  .form-confirm {
+    background: var(--accent2);
+    border: none;
+    color: #0f172a;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  /* Countdown overlay */
+  #overlay {
+    display: none;
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(15,23,42,0.92);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  #overlay.show { display: flex; }
+  #countdownNumber {
+    font-size: 100px;
+    font-weight: bold;
+    color: var(--accent);
+    text-shadow: 0 0 30px rgba(56,189,248,0.6);
+  }
+  #countdownLabel {
+    font-size: 20px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  #skipRestBtn {
+    margin-top: 20px;
+    background: var(--danger);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  #restInput {
+    margin-top: 15px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  #restInput input {
+    width: 60px;
+    background: #1e293b;
+    border: 1px solid #334155;
+    color: var(--text);
+    padding: 4px 8px;
+    border-radius: 6px;
+    margin-left: 6px;
+  }
+  .progress-bar-bg {
+    width: 100%;
+    height: 8px;
+    background: #0f172a;
+    border-radius: 4px;
+    margin-top: 12px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: var(--accent2);
+    width: 0%;
+    transition: width 0.3s;
+  }
+  .footer-note {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 30px;
+  }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="mt-5">Edzésterv</h1>
-        
-        <h2>Tömegelés</h2>
-        <p>Először számold ki, hogy mennyi kalóriára van szükséged egy nap, majd adj hozzá 500 kcal-t. Írd le, hogy mennyit ettél a következő 6-8 hét során.</p>
-        <a href="https://www.calculator.net/calorie-calculator.html" target="_blank">Kalória Kalkulátor</a>
-        
-        <h2>Edzésterv</h2>
-        <p>Az edzésterved a következőképpen néz ki:</p>
-        <table class="table table-striped">
-            <thead class="thead thead-dark">
-                <tr>
-                    <th>NAP</th>
-                    <th>GYAKORLAT</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Hétfő (Push)</td>
-                    <td>
-                        <ul>
-                            <li>Váll: Vállból nyomás, oldalemelés súlyzóval, oldalemelés csigán</li>
-                            <li>Mell: Fekvenyomás (esetleg smithkeretben), kézi súlyzóval való nyomás, tárogatás csigán</li>
-                            <li>Tricepsz: Letolás csigán, tolódzkodás</li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Kedd (Pull)</td>
-                    <td>
-                        <ul>
-                            <li>Bicepsz: Bicepszhajlítás, koncentrált bicepszhajlítás, kalapács bicepsz (alkar centrikus)</li>
-                            <li>Hát: Evezés fekpadnál, alsócsigás evezés, lehúzás szűken</li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Szerda (Láb)</td>
-                    <td>
-                        <ul>
-                            <li>Guggolás (esetleg smithkeretben is), combfeszítés, álló vádli, ülő vádli, lábtoló, merevlábas felhúzás</li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Csütörtök</td>
-                    <td>Pihenő</td>
-                </tr>
-                <tr>
-                    <td>Péntek (Push)</td>
-                    <td>
-                        <ul>
-                            <li>Váll: Vállból nyomás, oldalemelés súlyzóval, oldalemelés csigán</li>
-                            <li>Mell: Fekvenyomás (esetleg smithkeretben), kézi súlyzóval való nyomás, tárogatás csigán</li>
-                            <li>Tricepsz: Letolás csigán, tolódzkodás</li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Szombat (Pull)</td>
-                    <td>
-                        <ul>
-                            <li>Bicepsz: Bicepszhajlítás, koncentrált bicepszhajlítás, kalapács bicepsz (alkar centrikus)</li>
-                            <li>Hát: Evezés fekpadnál, alsócsigás evezés, lehúzás szűken</li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Vasárnap</td>
-                    <td>Pihenő</td>
-                </tr>
-            </tbody>
-        </table>
-        
-        <h2>Edzés Paraméterek</h2>
-        <p>Szettek: 3 (maximum 4), ismétlések: 8-12 (maximum 15), pihenőidő: 2-3 perc</p>
-        
-        <h2>Linkek</h2>
-        <ul>
-            <li><a href="https://musclewiki.com/" target="_blank">MuscleWiki - Gyakorlatok helyes kivitelezése</a></li>
-        </ul>
+
+<h1>🏋️ Edzés Tracker</h1>
+<div class="subtitle">Válassz napot, a gyakorlatok és szettek már előre fel vannak véve</div>
+
+<div class="day-selector" id="daySelector"><button class="day-btn">Hétfő</button><button class="day-btn">Kedd</button><button class="day-btn">Szerda</button><button class="day-btn active">Csütörtök</button><button class="day-btn">Péntek</button><button class="day-btn">Szombat</button><button class="day-btn">Vasárnap</button></div>
+
+<div class="container" id="dayPanels"><div class="day-panel active"><div class="exercise-card"><div class="exercise-header">
+    <div class="exercise-name">Evezés</div>
+    <div class="exercise-actions">
+      <button title="Gyakorlat törlése" onclick="removeExercise(0)">🗑</button>
     </div>
-</body>
-</html>
+  </div><div class="set-row">
+    <div class="set-info">
+      <input type="checkbox" class="set-checkbox">
+      <span class="set-label">1. szett</span>
+      <span class="set-detail">15 ismétlés</span>
+    </div>
+    <button class="remove-set">✕</button>
+  </div><div class="set-row">
+    <div class="set-info">
+      <input type="checkbox" class="set-checkbox">
+      <span class="set-label">2. szett</span>
+      <span class="set-detail">15 ismétlés</span>
+    </div>
+    <button class="remove-set">✕</button>
+  </div><div class="set-row">
+    <div class="set-info">
+      <input type="checkbox" class="set-checkbox">
+      <span class="set-label">3. szett</span>
+      <span class="set-detail">15 ismétlés</span>
+    </div>
+    <button class="remove-set">✕</button>
+  </div><div class="set-row">
+    <div class="set-info">
+      <input type="checkbox" class="set-checkbox">
+      <span class="set-label">4. szett</span>
+      <span class="set-detail">15 ismétlés</span>
+    </div>
+    <button class="remove-set">✕</button>
+  </div><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:0%"></div></div><button class="add-set-btn">+ Szett hozzáadása</button><div class="new-set-form">
+    <input type="number" placeholder="Ismétlés" class="repsInput" min="1">
+    <input type="text" placeholder="Súly (kg)" class="weightInput">
+    <button class="form-confirm">OK</button>
+  </div></div><div class="exercise-card"><div class="exercise-header">
+    <div class="exercise-name">Bicepsz hajlítás</div>
+    <div class="exercise-actions">
+      <button title="Gyakorlat törlése" onclick="removeExercise(1)">🗑</button>
+    </div>
+  </div><div class="set-row">
+    <div class="set-info">
+      <input type="checkbox" class="set-checkbox">
+      <span class="set-label">1. szett</span>
+      <span class="set-detail">16 ismétlés</span>
+    </div>
+    <button class="remove-set">✕</button>
+  </div><div class="set-row">
+    <div class="set-info">
+      <input type="checkbox" class="set-checkbox">
+      <span class="set-label">2. szett</span>
+      <span class="set-detail">16 ismétlés</span>
+    </div>
+    <button class="remove-set">✕</button>
+  </div><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:0%"></div></div><button class="add-set-btn">+ Szett hozzáadása</button><div class="new-set-form">
+    <input type="number" placeholder="Ismétlés" class="repsInput" min="1">
+    <input type="text" placeholder="Súly (kg)" class="weightInput">
+    <button class="form-confirm">OK</button>
+  </div></div><div class="exercise-card"><div class="exercise-header">
+    <div class="exercise-name">Oldalemelés</div>
+    <div class="exercise-actions">
+      <button title="Gyakorlat törlése" onclick="removeExercise(2)">🗑</button>
+    </div>
+  </div><div class="set-row">
+    <div class="set-info">
+      <input type="checkbox" class="set-checkbox">
+      <span class="set-label">1. szett</span>
+      <span class="set-detail">15 ismétlés</span>
+    </div>
+    <button class="remove-set">✕</button>
+  </div><div class="set-row">
+    <div class="set-info">
+      <input type="checkbox" class="set-checkbox">
+      <span class="set-label">2. szett</span>
+      <span class="set-detail">15 ismétlés</span>
+    </div>
+    <button class="remove-set">✕</button>
+  </div><div class="set-row">
+    <div class="set-info">
+      <input type="checkbox" class="set-checkbox">
+      <span class="set-label">3. szett</span>
+      <span class="set-detail">15 ismétlés</span>
+    </div>
+    <button class="remove-set">✕</button>
+  </div><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:0%"></div></div><button class="add-set-btn">+ Szett hozzáadása</button><div class="new-set-form">
+    <input type="number" placeholder="Ismétlés" class="repsInput" min="1">
+    <input type="text" placeholder="Súly (kg)" class="weightInput">
+    <button class="form-confirm">OK</button>
+  </div></div><div class="exercise-card"><div class="exercise-header">
+    <div class="exercise-name">Fekvőtámasz</div>
+    <div class="exercise-actions">
+      <button title="Gyakorlat törlése" onclick="removeExercise(3)">🗑</button>
+    </div>
+  </div><div class="set-row">
+    <div class="set-info">
+      <input type="checkbox" class="set-checkbox">
+      <span class="set-label">1. szett</span>
+      <span class="set-detail">15 ismétlés</span>
+    </div>
+    <button class="remove-set">✕</button>
+  </div><div class="set-row">
+    <div class="set-info">
+      <input type="checkbox" class="set-checkbox">
+      <span class="set-label">2. szett</span>
+      <span class="set-detail">15 ismétlés</span>
+    </div>
+    <button class="remove-set">✕</button>
+  </div><div class="set-row">
+    <div class="set-info">
+      <input type="checkbox" class="set-checkbox">
+      <span class="set-label">3. szett</span>
+      <span class="set-detail">15 ismétlés</span>
+    </div>
+    <button class="remove-set">✕</button>
+  </div><div class="progress-bar-bg"><div class="progress-bar-fill" style="width:0%"></div></div><button class="add-set-btn">+ Szett hozzáadása</button><div class="new-set-form">
+    <input type="number" placeholder="Ismétlés" class="repsInput" min="1">
+    <input type="text" placeholder="Súly (kg)" class="weightInput">
+    <button class="form-confirm">OK</button>
+  </div></div><button class="add-exercise-btn">+ Új gyakorlat hozzáadása</button><div class="new-exercise-form" id="newExerciseForm">
+    <input type="text" id="newExName" placeholder="Gyakorlat neve (pl. Fekvenyomás)">
+    <button class="form-confirm" onclick="addExercise()">Hozzáadás</button>
+  </div></div></div>
+
+<div id="restInput" style="text-align: center;">Pihenő idő szettek között:
+  <input type="number" id="restSecondsInput" value="90" min="5" max="600"> mp</div><div class="footer-note">Az adatok a böngésződben (localStorage) tárolódnak, csak ezen a gépen/böngészőben lesznek elérhetők.</div>
+
+<div id="overlay">
+  <div id="countdownLabel">Pihenő idő</div>
+  <div id="countdownNumber">60</div>
+  <button id="skipRestBtn">Kihagyás</button>
+</div>
+
+<script>
+const DAYS = ["Hétfő","Kedd","Szerda","Csütörtök","Péntek","Szombat","Vasárnap"];
+const STORAGE_KEY = "edzes_tracker_data_v2";
+const PRESET_DATA = {
+  "Hétfő": { exercises: [
+    { name: "Fekvőtámasz", sets: [{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false}] },
+    { name: "Vállból nyomás", sets: [{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false}] },
+    { name: "Oldalemelés", sets: [{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false}] },
+    { name: "Tricepsz fej felett", sets: [{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false}] },
+    { name: "Tolódzkodás (sittes)", sets: [{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false}] }
+  ]},
+  "Kedd": { exercises: [
+    { name: "Bicepsz hajlítás", sets: [{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false}] },
+    { name: "Kalapács", sets: [{reps:"8",weight:"",done:false},{reps:"8",weight:"",done:false},{reps:"8",weight:"",done:false}] },
+    { name: "Koncentrált bicepsz", sets: [{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false}] },
+    { name: "Evezés", sets: [{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false}] },
+    { name: "Szűk evezés", sets: [{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false}] },
+    { name: "Shrug", sets: [{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false}] }
+  ]},
+  "Szerda": { exercises: [
+    { name: "Guggolás", sets: [{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false}] },
+    { name: "Felhúzás", sets: [{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false}] },
+    { name: "Vádli", sets: [{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false}] }
+  ]},
+  "Csütörtök": { exercises: [
+    { name: "Evezés", sets: [{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false}] },
+    { name: "Bicepsz hajlítás", sets: [{reps:"16",weight:"",done:false},{reps:"16",weight:"",done:false}] },
+    { name: "Oldalemelés", sets: [{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false}] },
+    { name: "Fekvőtámasz", sets: [{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false},{reps:"15",weight:"",done:false}] }
+  ]},
+  "Péntek": { exercises: [] },
+  "Szombat": { exercises: [] },
+  "Vasárnap": { exercises: [] }
+};
+
+let data = loadData();
+
+function loadData(){
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if(raw) return JSON.parse(raw);
+  return JSON.parse(JSON.stringify(PRESET_DATA));
+}
+function saveData(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+}
+
+let currentDay = DAYS[0];
+let restSeconds = parseInt(localStorage.getItem("rest_seconds") || "90");
+let countdownInterval = null;
+
+function renderDaySelector(){
+  const el = document.getElementById("daySelector");
+  el.innerHTML = "";
+  DAYS.forEach(day => {
+    const btn = document.createElement("button");
+    btn.className = "day-btn" + (day === currentDay ? " active" : "");
+    btn.textContent = day;
+    btn.onclick = () => selectDay(day);
+    el.appendChild(btn);
+  });
+}
+
+function selectDay(day){
+  currentDay = day;
+  renderDaySelector();
+  renderDayPanels();
+}
+
+function renderDayPanels(){
+  const container = document.getElementById("dayPanels");
+  container.innerHTML = "";
+  const panel = document.createElement("div");
+  panel.className = "day-panel active";
+
+  const dayData = data[currentDay];
+
+  dayData.exercises.forEach((ex, exIdx) => {
+    panel.appendChild(renderExerciseCard(ex, exIdx));
+  });
+
+  const addExBtn = document.createElement("button");
+  addExBtn.className = "add-exercise-btn";
+  addExBtn.textContent = "+ Új gyakorlat hozzáadása";
+  addExBtn.onclick = () => showNewExerciseForm(panel);
+  panel.appendChild(addExBtn);
+
+  const newExForm = document.createElement("div");
+  newExForm.className = "new-exercise-form";
+  newExForm.id = "newExerciseForm";
+  newExForm.innerHTML = `
+    <input type="text" id="newExName" placeholder="Gyakorlat neve (pl. Fekvenyomás)">
+    <button class="form-confirm" onclick="addExercise()">Hozzáadás</button>
+  `;
+  panel.appendChild(newExForm);
+
+  container.appendChild(panel);
+}
+
+function showNewExerciseForm(){
+  const form = document.getElementById("newExerciseForm");
+  form.classList.add("show");
+  document.getElementById("newExName").focus();
+}
+
+function addExercise(){
+  const nameInput = document.getElementById("newExName");
+  const name = nameInput.value.trim();
+  if(!name) return;
+  data[currentDay].exercises.push({ name, sets: [] });
+  saveData();
+  renderDayPanels();
+}
+
+function removeExercise(exIdx){
+  data[currentDay].exercises.splice(exIdx, 1);
+  saveData();
+  renderDayPanels();
+}
+
+function renderExerciseCard(ex, exIdx){
+  const card = document.createElement("div");
+  card.className = "exercise-card";
+
+  const header = document.createElement("div");
+  header.className = "exercise-header";
+  header.innerHTML = `
+    <div class="exercise-name">${escapeHtml(ex.name)}</div>
+    <div class="exercise-actions">
+      <button title="Gyakorlat törlése" onclick="removeExercise(${exIdx})">🗑</button>
+    </div>
+  `;
+  card.appendChild(header);
+
+  ex.sets.forEach((set, setIdx) => {
+    card.appendChild(renderSetRow(ex, exIdx, set, setIdx));
+  });
+
+  const doneCount = ex.sets.filter(s => s.done).length;
+  const total = ex.sets.length;
+  const progress = document.createElement("div");
+  progress.className = "progress-bar-bg";
+  progress.innerHTML = `<div class="progress-bar-fill" style="width:${total? (doneCount/total*100):0}%"></div>`;
+  card.appendChild(progress);
+
+  const addSetBtn = document.createElement("button");
+  addSetBtn.className = "add-set-btn";
+  addSetBtn.textContent = "+ Szett hozzáadása";
+  addSetBtn.onclick = (e) => {
+    e.target.nextElementSibling.classList.add("show");
+    e.target.style.display = "none";
+  };
+  card.appendChild(addSetBtn);
+
+  const newSetForm = document.createElement("div");
+  newSetForm.className = "new-set-form";
+  newSetForm.innerHTML = `
+    <input type="number" placeholder="Ismétlés" class="repsInput" min="1">
+    <input type="text" placeholder="Súly (kg)" class="weightInput">
+    <button class="form-confirm">OK</button>
+  `;
+  newSetForm.querySelector(".form-confirm").onclick = () => {
+    const reps = newSetForm.querySelector(".repsInput").value;
+    const weight = newSetForm.querySelector(".weightInput").value;
+    if(!reps) return;
+    ex.sets.push({ reps, weight: weight || "", done: false });
+    saveData();
+    renderDayPanels();
+  };
+  card.appendChild(newSetForm);
+
+  return card;
+}
+
+function renderSetRow(ex, exIdx, set, setIdx){
+  const row = document.createElement("div");
+  row.className = "set-row" + (set.done ? " done" : "");
+
+  const detailText = set.weight
+    ? `${set.reps} ismétlés × ${set.weight} kg`
+    : `${set.reps} ismétlés`;
+
+  row.innerHTML = `
+    <div class="set-info">
+      <input type="checkbox" class="set-checkbox" ${set.done ? "checked" : ""}>
+      <span class="set-label">${setIdx + 1}. szett</span>
+      <span class="set-detail">${escapeHtml(detailText)}</span>
+    </div>
+    <button class="remove-set">✕</button>
+  `;
+
+  const checkbox = row.querySelector(".set-checkbox");
+  checkbox.onchange = () => {
+    const wasChecked = set.done;
+    set.done = checkbox.checked;
+    saveData();
+    if(!wasChecked && set.done){
+      startCountdown();
+    }
+    renderDayPanels();
+  };
+
+  row.querySelector(".remove-set").onclick = () => {
+    ex.sets.splice(setIdx, 1);
+    saveData();
+    renderDayPanels();
+  };
+
+  return row;
+}
+
+function escapeHtml(str){
+  const div = document.createElement("div");
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// Countdown overlay logic
+const overlay = document.getElementById("overlay");
+const countdownNumber = document.getElementById("countdownNumber");
+const skipBtn = document.getElementById("skipRestBtn");
+
+function startCountdown(){
+  let remaining = restSeconds;
+  countdownNumber.textContent = remaining;
+  overlay.classList.add("show");
+  clearInterval(countdownInterval);
+  countdownInterval = setInterval(() => {
+    remaining--;
+    if(remaining <= 0){
+      clearInterval(countdownInterval);
+      overlay.classList.remove("show");
+      try {
+        const beep = new AudioContext();
+        const o = beep.createOscillator();
+        o.frequency.value = 880;
+        o.connect(beep.destination);
+        o.start();
+        setTimeout(() => o.stop(), 300);
+      } catch(e){}
+    } else {
+      countdownNumber.textContent = remaining;
+    }
+  }, 1000);
+}
+
+skipBtn.onclick = () => {
+  clearInterval(countdownInterval);
+  overlay.classList.remove("show");
+};
+
+// Rest time settings input (added below footer note)
+const restInputDiv = document.createElement("div");
+restInputDiv.id = "restInput";
+restInputDiv.style.textAlign = "center";
+restInputDiv.innerHTML = `Pihenő idő szettek között:
+  <input type="number" id="restSecondsInput" value="${restSeconds}" min="5" max="600"> mp`;
+document.body.insertBefore(restInputDiv, document.querySelector(".footer-note"));
+document.getElementById("restSecondsInput").onchange = (e) => {
+  restSeconds = parseInt(e.target.value) || 90;
+  localStorage.setItem("rest_seconds", restSeconds);
+};
+
+renderDaySelector();
+renderDayPanels();
+</script>
+
+
+
+<div id="volume-booster-visusalizer">
+                    <div class="sound">
+                        <div class="sound-icon"></div>
+                        <div class="sound-wave sound-wave_one"></div>
+                        <div class="sound-wave sound-wave_two"></div>
+                        <div class="sound-wave sound-wave_three"></div>
+                    </div>
+                    <div class="segments-box">
+                        <div data-range="1-20" class="segment"><span></span></div>
+                        <div data-range="21-40" class="segment"><span></span></div>
+                        <div data-range="41-60" class="segment"><span></span></div>
+                        <div data-range="61-80" class="segment"><span></span></div>
+                        <div data-range="81-100" class="segment"><span></span></div>
+                    </div>
+                </div></body></html>
