@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="hu"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Halloweeni boszorkány konzervdobozból</title>
+<link href="https://fonts.googleapis.com/css2?family=Chewy&family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+html,body{height:100%;background:#050208;overflow:hidden;font-family:'Fredoka',sans-serif;color:#fff}
+#stage{position:absolute;width:1280px;height:720px;left:50%;top:50%;transform-origin:center;overflow:hidden}
+.slide{position:absolute;inset:0;opacity:0;pointer-events:none;transition:opacity .6s;
+ background:radial-gradient(circle at 75% 15%,#5a1a7a 0,transparent 40%),radial-gradient(circle at 10% 90%,#6b0f2a 0,transparent 45%),linear-gradient(160deg,#1a0630,#0a0212 70%)}
+.slide.on{opacity:1;pointer-events:auto}
+.slide::before{content:"";position:absolute;inset:0;background:
+ radial-gradient(2px 2px at 10% 20%,#fff8,transparent),radial-gradient(2px 2px at 30% 70%,#ffd58a,transparent),
+ radial-gradient(3px 3px at 55% 12%,#fff,transparent),radial-gradient(2px 2px at 85% 60%,#fff8,transparent),
+ radial-gradient(2px 2px at 65% 85%,#ffd58a,transparent),radial-gradient(2px 2px at 92% 30%,#fff,transparent)}
+.slide::after{content:"";position:absolute;left:-10%;right:-10%;bottom:-60px;height:220px;
+ background:radial-gradient(ellipse at 30% 100%,#8d5bd055,transparent 60%),radial-gradient(ellipse at 75% 100%,#ff7a1a33,transparent 60%);filter:blur(18px);animation:smoke 7s ease-in-out infinite alternate}
+@keyframes smoke{to{transform:translateX(60px) scaleY(1.3);opacity:.6}}
+h1,h2{font-family:'Chewy',cursive;font-weight:400;letter-spacing:1px;position:absolute;z-index:3}
+h2{font-size:64px;left:70px;top:40px;color:#ff8a1f;text-shadow:0 0 12px #ff7a1a,0 0 34px #ff7a1a88,0 4px 0 #6b0f2a}
+.tag{position:absolute;z-index:3;left:70px;top:125px;font-size:26px;color:#e9d2ff}
+.card{position:absolute;z-index:3;border-radius:28px;background:linear-gradient(145deg,#2e0f4acc,#14051fcc);
+ border:2px solid #ff8a1f66;box-shadow:0 0 24px #a24bff44,inset 0 0 30px #ff7a1a14;backdrop-filter:blur(4px)}
+.abs{position:absolute;z-index:2}
+.web{position:absolute;width:260px;height:260px;opacity:.55;z-index:1}
+.bob{animation:bob 3.5s ease-in-out infinite}.bob2{animation:bob 4.5s ease-in-out infinite reverse}
+@keyframes bob{50%{transform:translateY(-14px) rotate(2deg)}}
+.tw{animation:tw 2.4s ease-in-out infinite}@keyframes tw{50%{opacity:.35;transform:scale(.8)}}
+.glow{filter:drop-shadow(0 0 14px #ff7a1a99)}
+.mat{width:190px;height:170px;text-align:center;padding-top:16px;font-size:24px;font-weight:600}
+.mat svg{width:84px;height:84px;display:block;margin:0 auto 6px}
+.num{position:absolute;z-index:3;right:70px;top:36px;width:96px;height:96px;border-radius:50%;
+ background:radial-gradient(circle at 35% 30%,#ffa53a,#e2560a);font:60px 'Chewy';display:grid;place-items:center;box-shadow:0 0 30px #ff7a1a}
+.big{font-size:34px;line-height:1.3}
+.pill{display:inline-block;padding:8px 22px;border-radius:40px;background:#ff8a1f;color:#1a0630;font-weight:600;font-size:26px}
+.warn{background:linear-gradient(135deg,#8a1236,#4b0a24);border-color:#ff5c7a}
+#hud{position:fixed;bottom:10px;left:0;right:0;text-align:center;z-index:99;color:#fff6;font-size:14px}
+</style></head><body>
+
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="witch" viewBox="0 0 200 270">
+ <ellipse cx="100" cy="258" rx="70" ry="9" fill="#0008"/>
+ <path d="M100 8 L62 100 L138 100Z" fill="#150822" stroke="#a24bff" stroke-width="2"/>
+ <path d="M100 8 Q112 -2 122 6" stroke="#150822" stroke-width="7" fill="none" stroke-linecap="round"/>
+ <rect x="63" y="82" width="74" height="16" fill="#e2560a"/><rect x="94" y="80" width="12" height="20" rx="2" fill="#ffd58a"/>
+ <ellipse cx="100" cy="102" rx="92" ry="15" fill="#150822" stroke="#a24bff" stroke-width="2"/>
+ <path d="M52 108 q-18 45 -6 90 M62 112 q-14 40 -2 84 M148 108 q18 45 6 90 M138 112 q14 40 2 84" stroke="#ff8a1f" stroke-width="9" fill="none" stroke-linecap="round"/>
+ <rect x="52" y="108" width="96" height="140" rx="12" fill="var(--can,#7a35b8)"/>
+ <rect x="52" y="108" width="96" height="140" rx="12" fill="url(#sh)"/>
+ <rect x="52" y="122" width="96" height="6" fill="#0003"/><rect x="52" y="228" width="96" height="6" fill="#0003"/>
+ <circle cx="76" cy="160" r="15" fill="#fff"/><circle cx="124" cy="160" r="15" fill="#fff"/>
+ <circle cx="79" cy="162" r="7" fill="#150822"/><circle cx="121" cy="162" r="7" fill="#150822"/>
+ <circle cx="81" cy="159" r="2.5" fill="#fff"/><circle cx="123" cy="159" r="2.5" fill="#fff"/>
+ <path d="M100 172 l-8 20 h16z" fill="#7bd15a"/>
+ <path d="M80 205 Q100 224 120 205" stroke="#150822" stroke-width="5" fill="none" stroke-linecap="round"/>
+ <circle cx="60" cy="190" r="7" fill="#ff7aa8" opacity=".7"/><circle cx="140" cy="190" r="7" fill="#ff7aa8" opacity=".7"/>
+ <path d="M100 120 l3 7 7 1 -5 5 2 7 -7-4 -7 4 2-7 -5-5 7-1z" fill="#ffd58a" transform="translate(-6 -4) scale(.9)"/>
+</symbol>
+<linearGradient id="sh" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity=".28"/><stop offset=".3" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".35"/></linearGradient>
+<symbol id="bat" viewBox="0 0 120 60"><path d="M60 14 q6-10 10 0 q22-22 50-6 q-14 4-16 16 q-10-6-18 4 q-8-8-14 8 q-6 12-12 12 q-6 0-12-12 q-6-16-14-8 q-8-10-18-4 q-2-12-16-16 q28-16 50 6 q4-10 10 0z" fill="#0b0414" stroke="#a24bff" stroke-width="1.5"/><circle cx="54" cy="24" r="2.5" fill="#ffb347"/><circle cx="66" cy="24" r="2.5" fill="#ffb347"/></symbol>
+<symbol id="pump" viewBox="0 0 100 90"><rect x="46" y="4" width="9" height="18" rx="4" fill="#5c8a2a"/><ellipse cx="30" cy="52" rx="24" ry="32" fill="#d9520a"/><ellipse cx="70" cy="52" rx="24" ry="32" fill="#d9520a"/><ellipse cx="50" cy="52" rx="22" ry="34" fill="#ff8a1f"/><path d="M36 46 l8 -10 4 12z M64 46 l-8 -10 -4 12z" fill="#2a0a3a"/><path d="M34 62 Q50 78 66 62 Q50 68 34 62z" fill="#2a0a3a"/></symbol>
+<symbol id="spider" viewBox="0 0 60 50"><g stroke="#0b0414" stroke-width="3" fill="none" stroke-linecap="round"><path d="M22 24 l-14 -12 M22 28 l-18 2 M24 32 l-14 14 M38 24 l14 -12 M38 28 l18 2 M36 32 l14 14"/></g><ellipse cx="30" cy="30" rx="12" ry="14" fill="#1b0a2b" stroke="#a24bff"/><circle cx="26" cy="22" r="3" fill="#fff"/><circle cx="34" cy="22" r="3" fill="#fff"/><circle cx="26" cy="22" r="1.3"/><circle cx="34" cy="22" r="1.3"/></symbol>
+<symbol id="star" viewBox="0 0 40 40"><path d="M20 2l5 13 14 1-11 9 4 14-12-8-12 8 4-14L1 16l14-1z" fill="#ffd58a"/></symbol>
+<symbol id="moon" viewBox="0 0 120 120"><circle cx="60" cy="60" r="50" fill="#ffe9b0"/><circle cx="82" cy="48" r="44" fill="#1a0630"/></symbol>
+<symbol id="webc" viewBox="0 0 200 200"><g stroke="#e9d2ff" stroke-width="1.2" fill="none"><path d="M0 0 L200 0 M0 0 L200 60 M0 0 L200 130 M0 0 L150 200 M0 0 L70 200 M0 0 L0 200"/><path d="M40 0 Q35 35 0 40 M80 0 Q70 70 0 80 M120 0 Q105 105 0 120 M160 0 Q140 140 0 160"/></g></symbol>
+<symbol id="hat" viewBox="0 0 120 120"><path d="M60 6 L28 92 L92 92Z" fill="#150822" stroke="#a24bff" stroke-width="2"/><rect x="30" y="76" width="60" height="14" fill="#e2560a"/><ellipse cx="60" cy="94" rx="52" ry="12" fill="#150822" stroke="#a24bff" stroke-width="2"/></symbol>
+</defs></svg>
+
+<div id="stage">
+
+<!-- 1 -->
+<section class="slide on">
+ <svg class="web" style="left:0;top:0"><use href="#webc"/></svg>
+ <svg class="abs tw" style="left:120px;top:90px;width:40px"><use href="#star"/></svg>
+ <svg class="abs" style="right:80px;top:40px;width:140px;height:140px"><use href="#moon"/></svg>
+ <svg class="abs bob" style="left:560px;top:70px;width:110px"><use href="#bat"/></svg>
+ <svg class="abs bob2" style="left:760px;top:150px;width:80px"><use href="#bat"/></svg>
+ <h1 style="left:70px;top:150px;font-size:96px;line-height:1;color:#ff8a1f;text-shadow:0 0 16px #ff7a1a,0 0 50px #ff7a1a88,0 6px 0 #6b0f2a">Halloweeni<br>boszorkány<br><span style="color:#d9a8ff;text-shadow:0 0 16px #a24bff,0 6px 0 #3b0a5a">konzervdobozból</span></h1>
+ <div class="abs pill" style="left:74px;top:600px">✨ Kreatív kézműves projekt</div>
+ <svg class="abs bob glow" style="left:830px;top:150px;width:340px;height:460px"><use href="#witch"/></svg>
+ <svg class="abs" style="left:790px;top:540px;width:110px"><use href="#pump"/></svg>
+ <svg class="abs" style="left:1120px;top:560px;width:90px"><use href="#pump"/></svg>
+ <svg class="abs bob2" style="left:1010px;top:70px;width:60px"><use href="#spider"/></svg>
+</section>
+
+<!-- 2 -->
+<section class="slide">
+ <h2>Mit fogunk készíteni?</h2><div class="num">1</div>
+ <div class="card" style="left:70px;top:170px;width:520px;height:440px;padding:44px">
+  <p class="big">Egy <b style="color:#ff8a1f">üres konzervdobozból</b><br>lesz egy cuki<br>kalapos boszorkány! 🧙‍♀️</p>
+  <p class="big" style="margin-top:26px;color:#d9a8ff">Festünk, ragasztunk,<br>varázsolunk!</p>
+ </div>
+ <div class="card" style="left:650px;top:110px;width:560px;height:540px;border-radius:200px 200px 40px 40px;background:radial-gradient(circle at 50% 40%,#7a35b866,#14051fcc 70%)"></div>
+ <svg class="abs bob glow" style="left:745px;top:140px;width:370px;height:500px"><use href="#witch"/></svg>
+ <svg class="abs tw" style="left:680px;top:150px;width:40px"><use href="#star"/></svg>
+ <svg class="abs bob2" style="left:1110px;top:130px;width:90px"><use href="#bat"/></svg>
+</section>
+
+<!-- 3 -->
+<section class="slide">
+ <svg class="web" style="right:0;top:0;transform:scaleX(-1)"><use href="#webc"/></svg>
+ <h2>Amire szükségünk lesz</h2><div class="num">🎒</div>
+ <div class="card mat" style="left:70px;top:190px;transform:rotate(-3deg)"><svg viewBox="0 0 100 100"><rect x="22" y="14" width="56" height="74" rx="8" fill="#b9b9c8"/><rect x="22" y="30" width="56" height="8" fill="#8a8a9c"/><rect x="22" y="64" width="56" height="8" fill="#8a8a9c"/></svg>Konzervdoboz</div>
+ <div class="card mat" style="left:290px;top:210px;transform:rotate(2deg)"><svg viewBox="0 0 100 100"><path d="M26 40h48v46a8 8 0 0 1-8 8H34a8 8 0 0 1-8-8z" fill="#ff8a1f"/><rect x="22" y="28" width="56" height="14" rx="5" fill="#a24bff"/><path d="M40 60q10 14 20 0" stroke="#fff" fill="none" stroke-width="5"/></svg>Festék</div>
+ <div class="card mat" style="left:510px;top:190px;transform:rotate(-2deg)"><svg viewBox="0 0 100 100"><rect x="44" y="40" width="12" height="54" rx="5" fill="#c0703a" transform="rotate(30 50 60)"/><path d="M30 12q22-8 34 22l-12 8q-18-2-22-30z" fill="#ff5c7a"/></svg>Ecset</div>
+ <div class="card mat" style="left:730px;top:210px;transform:rotate(3deg)"><svg viewBox="0 0 100 100"><rect x="14" y="26" width="52" height="52" rx="6" fill="#ff8a1f"/><rect x="30" y="18" width="52" height="52" rx="6" fill="#a24bff"/><rect x="42" y="34" width="46" height="50" rx="6" fill="#8a1236"/></svg>Színes papír</div>
+ <div class="card mat" style="left:950px;top:190px;transform:rotate(-3deg)"><svg viewBox="0 0 100 100"><rect x="34" y="34" width="32" height="56" rx="8" fill="#fff"/><rect x="34" y="20" width="32" height="18" fill="#7bd15a"/><rect x="42" y="8" width="16" height="14" fill="#5c8a2a"/></svg>Ragasztó</div>
+ <div class="card mat" style="left:180px;top:410px;transform:rotate(2deg)"><svg viewBox="0 0 100 100"><path d="M20 20l40 46M80 20L40 66" stroke="#ccc" stroke-width="7" stroke-linecap="round"/><circle cx="30" cy="78" r="12" fill="none" stroke="#ff8a1f" stroke-width="7"/><circle cx="70" cy="78" r="12" fill="none" stroke="#ff8a1f" stroke-width="7"/></svg>Olló ✂️<br><span style="font-size:15px;color:#ffb0c0">felnőttel!</span></div>
+ <div class="card mat" style="left:400px;top:430px;transform:rotate(-2deg)"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="34" fill="none" stroke="#ff8a1f" stroke-width="8"/><path d="M30 40q20 40 40 0M34 60q20-30 34 6" stroke="#ffb347" stroke-width="5" fill="none"/></svg>Fonal</div>
+ <div class="card mat" style="left:620px;top:410px;transform:rotate(3deg)"><svg viewBox="0 0 100 100"><rect x="42" y="10" width="16" height="70" rx="6" fill="#2a0a3a" stroke="#a24bff" stroke-width="3"/><path d="M42 80l8 14 8-14z" fill="#ff8a1f"/></svg>Filctoll</div>
+ <div class="card mat" style="left:840px;top:430px;transform:rotate(-3deg)"><svg viewBox="0 0 100 100"><use href="#star" x="6" y="6" width="50" height="50"/><use href="#pump" x="40" y="40" width="56" height="50"/></svg>Díszek ✨</div>
+ <div class="card mat" style="left:1040px;top:410px;width:170px;transform:rotate(2deg)"><svg viewBox="0 0 100 100"><circle cx="30" cy="50" r="22" fill="#fff"/><circle cx="72" cy="50" r="18" fill="#fff"/><circle cx="34" cy="54" r="9"/><circle cx="70" cy="48" r="7"/></svg>Mozgó szem</div>
+ <svg class="abs bob" style="left:1120px;top:600px;width:70px"><use href="#spider"/></svg>
+</section>
+
+<!-- 4 -->
+<section class="slide">
+ <h2>Doboz előkészítése</h2><div class="num">1</div>
+ <div class="card" style="left:70px;top:180px;width:270px;height:300px;text-align:center;padding-top:30px"><div style="font-size:90px">🥫</div><p class="big">Mosd ki!</p></div>
+ <div class="card" style="left:370px;top:180px;width:270px;height:300px;text-align:center;padding-top:30px"><div style="font-size:90px">💧</div><p class="big">Szárítsd meg!</p></div>
+ <div class="card" style="left:670px;top:180px;width:270px;height:300px;text-align:center;padding-top:30px"><div style="font-size:90px">🖌️</div><p class="big">Alapozz<br>fehér festékkel</p></div>
+ <div class="card warn" style="left:70px;top:520px;width:870px;height:120px;padding:26px 40px;font-size:32px">⚠️ A doboz szélét <b>felnőtt</b> készítse elő és ellenőrizze – ne legyen éles!</div>
+ <svg class="abs bob glow" style="left:980px;top:170px;width:260px;height:400px"><use href="#witch" style="--can:#d9d9e6"/></svg>
+ <svg class="abs bob2" style="left:1040px;top:590px;width:80px"><use href="#bat"/></svg>
+</section>
+
+<!-- 5 -->
+<section class="slide">
+ <h2>A boszorkány teste</h2><div class="num">2</div>
+ <div class="card" style="left:70px;top:190px;width:340px;height:400px;text-align:center;padding-top:36px"><svg style="width:110px;height:110px" viewBox="0 0 100 100"><path d="M26 40h48v46a8 8 0 0 1-8 8H34a8 8 0 0 1-8-8z" fill="#7a35b8"/><rect x="22" y="28" width="56" height="14" rx="5" fill="#ff8a1f"/></svg><p class="big" style="margin-top:20px">Válassz<br>varázsszínt!</p><div style="font-size:44px;margin-top:10px">🟣 🟠 🟢</div></div>
+ <div class="card" style="left:440px;top:190px;width:340px;height:400px;text-align:center;padding-top:36px"><div style="font-size:100px">🖌️</div><p class="big">Fesd be az<br>egész dobozt</p></div>
+ <div class="card" style="left:810px;top:190px;width:400px;height:400px;text-align:center;padding-top:36px"><div style="font-size:100px">⏳</div><p class="big">Várj, amíg<br>megszárad</p><p style="font-size:24px;color:#d9a8ff">Két réteg szebb! ✨</p></div>
+ <svg class="abs tw" style="left:420px;top:130px;width:44px"><use href="#star"/></svg>
+ <svg class="abs bob" style="left:1100px;top:600px;width:80px"><use href="#pump"/></svg>
+</section>
+
+<!-- 6 -->
+<section class="slide">
+ <h2>Az arc elkészítése</h2><div class="num">3</div>
+ <svg class="abs bob glow" style="left:70px;top:150px;width:400px;height:540px"><use href="#witch"/></svg>
+ <div class="card" style="left:520px;top:180px;width:330px;height:130px;padding:24px;font-size:32px">👀 <b>Szem</b> – mozgó szem vagy filc</div>
+ <div class="card" style="left:880px;top:180px;width:330px;height:130px;padding:24px;font-size:32px">🥒 <b>Orr</b> – zöld papírháromszög</div>
+ <div class="card" style="left:520px;top:340px;width:330px;height:130px;padding:24px;font-size:32px">😊 <b>Száj</b> – mosolyt rajzolunk</div>
+ <div class="card" style="left:880px;top:340px;width:330px;height:130px;padding:24px;font-size:32px">🧶 <b>Haj</b> – narancs fonal</div>
+ <div class="card" style="left:520px;top:500px;width:690px;height:110px;padding:24px;font-size:32px">🌸 Pirospozsgás arc, szeplők, szempilla…</div>
+</section>
+
+<!-- 7 -->
+<section class="slide">
+ <svg class="web" style="left:0;top:0"><use href="#webc"/></svg>
+ <h2 style="left:300px">A boszorkánykalap</h2><div class="num">4</div>
+ <svg class="abs bob glow" style="left:60px;top:150px;width:300px;height:300px"><use href="#hat"/></svg>
+ <div class="card" style="left:400px;top:170px;width:230px;height:250px;text-align:center;padding-top:20px"><div class="pill">1</div><div style="font-size:70px;margin:14px 0">⬛</div><p style="font-size:26px">Vágj ki egy<br>fekete negyedkört</p></div>
+ <div class="card" style="left:655px;top:170px;width:230px;height:250px;text-align:center;padding-top:20px"><div class="pill">2</div><div style="font-size:70px;margin:14px 0">📐</div><p style="font-size:26px">Hajtsd<br>kúp alakúra</p></div>
+ <div class="card" style="left:910px;top:170px;width:300px;height:250px;text-align:center;padding-top:20px"><div class="pill">3</div><div style="font-size:70px;margin:14px 0">🧷</div><p style="font-size:26px">Ragaszd össze<br>és tartsd egy percig</p></div>
+ <div class="card" style="left:400px;top:450px;width:810px;height:150px;padding:28px 40px;font-size:32px;border-color:#a24bff">🎩 Kör alakú karimát vágunk, a kúpot ráragasztjuk, és a kalap mehet a dobozra! <span style="color:#ff8a1f">Narancs szalag = szuper!</span></div>
+ <svg class="abs bob2" style="left:150px;top:540px;width:90px"><use href="#bat"/></svg>
+</section>
+
+<!-- 8 -->
+<section class="slide">
+ <h2>Dekorálás</h2><div class="num">5</div>
+ <svg class="abs bob glow" style="left:820px;top:130px;width:380px;height:540px"><use href="#witch"/></svg>
+ <div class="card" style="left:70px;top:170px;width:210px;height:200px;text-align:center;padding-top:26px"><svg style="width:90px;height:90px"><use href="#webc"/></svg><p style="font-size:28px">Pókháló</p></div>
+ <div class="card" style="left:305px;top:190px;width:210px;height:200px;text-align:center;padding-top:26px"><svg style="width:90px;height:90px"><use href="#star"/></svg><p style="font-size:28px">Csillagok</p></div>
+ <div class="card" style="left:540px;top:170px;width:230px;height:200px;text-align:center;padding-top:26px"><svg style="width:110px;height:90px"><use href="#bat"/></svg><p style="font-size:28px">Denevérek</p></div>
+ <div class="card" style="left:70px;top:410px;width:210px;height:200px;text-align:center;padding-top:26px"><div style="font-size:70px">🎀</div><p style="font-size:28px">Szalagok</p></div>
+ <div class="card" style="left:305px;top:430px;width:210px;height:200px;text-align:center;padding-top:26px"><div style="font-size:70px">🧶</div><p style="font-size:28px">Hajfonal</p></div>
+ <div class="card" style="left:540px;top:410px;width:230px;height:200px;text-align:center;padding-top:26px"><div style="font-size:70px">✨</div><p style="font-size:28px">Csillám</p></div>
+ <svg class="abs" style="left:750px;top:570px;width:80px"><use href="#pump"/></svg>
+</section>
+
+<!-- 9 -->
+<section class="slide">
+ <h2 style="left:0;right:0;text-align:center;font-size:76px">Készen van! 🎉</h2>
+ <div class="card" style="left:70px;top:190px;width:300px;height:400px;text-align:center;padding-top:30px"><svg style="width:140px;height:190px" viewBox="0 0 100 100"><rect x="22" y="14" width="56" height="74" rx="8" fill="#b9b9c8"/><rect x="22" y="30" width="56" height="8" fill="#8a8a9c"/></svg><p class="big">Előtte</p><p style="font-size:24px;color:#d9a8ff">egy sima doboz</p></div>
+ <div class="abs" style="left:395px;top:340px;font-size:100px;color:#ff8a1f;text-shadow:0 0 20px #ff7a1a">➜</div>
+ <div class="abs" style="left:560px;top:120px;width:520px;height:560px;border-radius:50%;background:radial-gradient(circle,#a24bff66,transparent 65%)"></div>
+ <svg class="abs bob glow" style="left:570px;top:120px;width:420px;height:570px"><use href="#witch"/></svg>
+ <p class="abs big" style="left:1000px;top:330px;width:250px;color:#ff8a1f;text-shadow:0 0 14px #ff7a1a;font-family:Chewy;font-size:46px">Utána: <br>boszi! 🧙‍♀️</p>
+ <svg class="abs tw" style="left:540px;top:150px;width:50px"><use href="#star"/></svg>
+ <svg class="abs tw" style="left:1040px;top:180px;width:40px"><use href="#star"/></svg>
+ <svg class="abs bob2" style="left:400px;top:110px;width:100px"><use href="#bat"/></svg>
+ <svg class="abs" style="left:1090px;top:560px;width:100px"><use href="#pump"/></svg>
+</section>
+
+<!-- 10 -->
+<section class="slide">
+ <h2>Kreatív ötletek</h2><div class="num">💡</div>
+ <div class="card" style="left:60px;top:180px;width:220px;height:430px;text-align:center"><svg style="width:190px;height:290px;margin-top:20px"><use href="#witch" style="--can:#7a35b8"/></svg><p class="big">Lila</p></div>
+ <div class="card" style="left:300px;top:200px;width:220px;height:430px;text-align:center"><svg style="width:190px;height:290px;margin-top:20px"><use href="#witch" style="--can:#ee6a10"/></svg><p class="big">Narancs</p></div>
+ <div class="card" style="left:540px;top:180px;width:220px;height:430px;text-align:center"><svg style="width:190px;height:290px;margin-top:20px"><use href="#witch" style="--can:#4fa83a"/></svg><p class="big">Zöld</p></div>
+ <div class="card" style="left:780px;top:200px;width:220px;height:430px;text-align:center"><svg style="width:190px;height:290px;margin-top:20px;transform:rotate(-8deg)"><use href="#witch" style="--can:#d9298a"/></svg><p class="big">Vicces 🤪</p></div>
+ <div class="card" style="left:1020px;top:180px;width:200px;height:430px;text-align:center"><svg style="width:190px;height:290px;margin-top:20px"><use href="#witch" style="--can:#ff8fc0"/></svg><p class="big">Cuki 💖</p></div>
+</section>
+
+<!-- 11 -->
+<section class="slide">
+ <svg class="web" style="left:0;top:0"><use href="#webc"/></svg>
+ <svg class="web" style="right:0;top:0;transform:scaleX(-1)"><use href="#webc"/></svg>
+ <svg class="abs" style="left:560px;top:30px;width:130px;height:130px"><use href="#moon"/></svg>
+ <svg class="abs bob glow" style="left:120px;top:250px;width:250px;height:340px"><use href="#witch" style="--can:#ee6a10"/></svg>
+ <svg class="abs bob2 glow" style="left:910px;top:250px;width:250px;height:340px"><use href="#witch" style="--can:#4fa83a"/></svg>
+ <svg class="abs bob glow" style="left:500px;top:250px;width:280px;height:380px"><use href="#witch"/></svg>
+ <h1 style="left:0;right:0;top:130px;text-align:center;font-size:88px;color:#ff8a1f;text-shadow:0 0 16px #ff7a1a,0 0 50px #ff7a1a88,0 6px 0 #6b0f2a">Kreatívkodjunk együtt! 🎃</h1>
+ <p class="abs" style="left:0;right:0;top:640px;text-align:center;font-size:32px;color:#e9d2ff">A legegyszerűbb dolgokból is készülhet valami varázslatos.</p>
+ <svg class="abs bob" style="left:300px;top:80px;width:100px"><use href="#bat"/></svg>
+ <svg class="abs bob2" style="left:900px;top:90px;width:100px"><use href="#bat"/></svg>
+ <svg class="abs tw" style="left:250px;top:200px;width:40px"><use href="#star"/></svg>
+ <svg class="abs tw" style="left:1000px;top:210px;width:40px"><use href="#star"/></svg>
+</section>
+</div>
+<div id="hud">← → nyilak / kattintás / érintés a lapozáshoz · F: teljes képernyő</div>
+<script>
+const S=[...document.querySelectorAll('.slide')],st=document.getElementById('stage');let i=0;
+function fit(){st.style.transform`translate(-50%,-50%) scale(${Math.min(innerWidth/1280,innerHeight/720)})`}
+function fit(){st.style.transform='translate(-50%,-50%) scale('+Math.min(innerWidth/1280,innerHeight/720)+')'}
+function go(n){i=Math.max(0,Math.min(S.length-1,n));S.forEach((s,k)=>s.classList.toggle('on',k==i))}
+addEventListener('resize',fit);fit();
+addEventListener('keydown',e=>{if(['ArrowRight',' ','PageDown'].includes(e.key))go(i+1);if(['ArrowLeft','PageUp'].includes(e.key))go(i-1);if(e.key=='f')document.documentElement.requestFullscreen()});
+addEventListener('click',e=>go(e.clientX>innerWidth/2?i+1:i-1));
+</script></body></html>
